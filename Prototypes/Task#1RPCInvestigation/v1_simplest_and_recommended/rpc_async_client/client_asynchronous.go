@@ -1,3 +1,7 @@
+/*
+ * A TCP RPC client invoking remote procedure asynchronously
+*/
+
 package main
 
 import (
@@ -16,9 +20,12 @@ func main(){
 	if err != nil {
         	log.Fatal("dialing:", err)
 	}
+        fmt.Printf("\n\nCalling Remote method Add asynchronously with")
+        fmt.Printf("\nOperand 1 = 17")
+        fmt.Printf("\nOperand 2 = 8")
         goreply := client.Go("Arithmatic.Add", args, &answer, nil)
         reply := <-goreply.Done
         if reply!=nil{
         }
-        fmt.Printf("Arith = %d\n", answer)
+        fmt.Printf("\nAnswer returned by the server = %d\n", answer)
 }

@@ -1,3 +1,7 @@
+/*
+ * A simple TCP server .... listening to only one request using GOB as wire format
+*/
+
 package main
 import (
         "fmt"
@@ -9,9 +13,11 @@ import (
 type Arithmatic int
 
 func (t *Arithmatic) Add(args rpc_def.Args, answer *int) error {
-    fmt.Printf("\nInside Add\n")
+    fmt.Printf("\nProcedure Add called by the remote client")
+    fmt.Printf("\nOperand 1 = %d", args.Operand1)
+    fmt.Printf("\nOperand 2 = %d", args.Operand2)
     *answer = args.Operand1 + args.Operand2
-    fmt.Printf("answer = %d", *answer)
+    fmt.Printf("\nAnswer = %d", *answer)
     return nil
 }
 
@@ -25,6 +31,7 @@ func main(){
     //Listen on tcp listener
     listener, err := net.ListenTCP("tcp", tcpAddr)
     //Accept the connections
+    fmt.Printf("\nA Single connection TCP RPC server. Will serve single request and terminate. Listening...")
     conn, err := listener.Accept()
     //Serve the requests on conn
     rpc.ServeConn(conn)

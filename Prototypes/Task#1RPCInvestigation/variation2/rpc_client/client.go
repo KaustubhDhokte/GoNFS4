@@ -1,3 +1,7 @@
+/*
+ * RPC client that uses json as wire format for marshalling the arguments
+*/
+
 package main
 
 import (
@@ -21,11 +25,14 @@ func main(){
 	var reply int
 	//Create new client object for jsonrpc
 	c := jsonrpc.NewClient(conn)
-	//Call the remote procedure Add exposed on type Arithmatic
+        fmt.Printf("\nCalling Remote method Add with")
+        fmt.Printf("\nOperand 1 = 7")
+        fmt.Printf("\nOperand 2 = 8")
+ 	//Call the remote procedure Add exposed on type Arithmatic
 	err = c.Call("Arithmatic.Add", args, &reply)
 	if err != nil {
 	    log.Fatal("arith error:", err)
 	}
-	fmt.Printf("Arith: %d+%d=%d\n", args.Operand1, args.Operand2, reply)
+	fmt.Printf("\nAnswer returned by the server = %d\n", reply)
 
 }

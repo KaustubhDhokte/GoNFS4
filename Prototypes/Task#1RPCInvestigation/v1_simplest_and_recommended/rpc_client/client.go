@@ -1,3 +1,7 @@
+/*
+ * A simple TCP RPC client
+*/
+
 package main
 
 import (
@@ -16,9 +20,12 @@ func main(){
 	if err != nil {
         	log.Fatal("dialing:", err)
 	}
+        fmt.Printf("\nCalling Remote method Add with")
+        fmt.Printf("\nOperand 1 = 17")
+        fmt.Printf("\nOperand 2 = 8")
 	err = client.Call("Arithmatic.Add", args, &answer)
 	if err != nil {
     		log.Fatal("Arith error:", err)
 	}
-        fmt.Printf("Arith = %d\n", answer)
+        fmt.Printf("\nAnswer returned by server = %d\n", answer)
 }

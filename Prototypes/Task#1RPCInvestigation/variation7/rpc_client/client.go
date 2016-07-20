@@ -1,3 +1,7 @@
+/*
+ * A simple json RPC client
+*/
+
 package main
 
 import (
@@ -20,9 +24,12 @@ func main(){
         	log.Fatal("dialing:", err)
 	}
 	//Call remote procedure
+        fmt.Printf("\nCalling Remote method Add with")
+        fmt.Printf("\nOperand 1 = 17")
+        fmt.Printf("\nOperand 2 = 8")
 	err = conn.Call("Arithmatic.Add", args, &answer)
 	if err != nil {
     		log.Fatal("arith error:", err)
 	}
-	fmt.Printf("Arith: %d\n", answer)
+	fmt.Printf("\nAnswer returned by the server =  %d\n", answer)
 }
